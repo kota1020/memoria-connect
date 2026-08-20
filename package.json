@@ -1,0 +1,39 @@
+{
+  "name": "memoria-connect",
+  "version": "0.1.0",
+  "description": "A drop-in memory + judgment layer for AI agents. Connect any agent in one import: it records decision + why + outcome, recalls the relevant past before the next decision, and closes outcomes automatically.",
+  "type": "module",
+  "main": "src/index.mjs",
+  "exports": {
+    ".": "./src/index.mjs",
+    "./observe": "./src/observe.mjs"
+  },
+  "bin": {
+    "memoria": "bin/memoria.mjs"
+  },
+  "files": [
+    "src",
+    "bin",
+    "examples",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "test": "node test/test.mjs",
+    "example": "node examples/quickstart.mjs"
+  },
+  "keywords": [
+    "ai",
+    "agents",
+    "memory",
+    "llm",
+    "judgment",
+    "feedback-loop",
+    "observability"
+  ],
+  "author": "kota1020",
+  "license": "MIT",
+  "engines": {
+    "node": ">=18"
+  }
+}
