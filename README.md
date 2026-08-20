@@ -43,6 +43,15 @@ const id = decide({
 outcome(id, { result: 'conversion +40%', verdict: 'win' }); // win | loss | mixed
 ```
 
+Records are free text an agent wrote, so you can always take one back out:
+
+```js
+import { forget, prune } from 'memoria-connect';
+
+forget(id);                        // erase one judgment from both ledgers
+prune({ olderThanDays: 365 });     // trim old records; open judgments are kept
+```
+
 ## Close outcomes automatically
 
 Attach an `outcomeSpec` and let the observer close it once the result is
@@ -97,8 +106,13 @@ memoria outcome <id> --result "..." --verdict win|loss|mixed
 memoria open
 memoria recall  "query text" [--limit 5]
 memoria observe [--dry]
+memoria forget  <id>     # erase one judgment from the store
+memoria prune   [--days 365] [--include-open]
 memoria where            # print where your store lives
 ```
+
+Use `--flag=value` for a value that itself starts with `--`, or put positional
+arguments after a bare `--`.
 
 ## Schedule the observer
 
@@ -122,6 +136,19 @@ macOS (launchd) or Linux (cron), e.g. every 30 minutes:
 
 `memoria-connect` stores everything locally under `$MEMORIA_HOME` (default
 `~/.memoria`) as plain JSONL. Nothing is uploaded. The package ships no data.
+
+The store holds the *reasons* behind your agent's decisions, which is usually
+the sensitive part, so it is created private to its owner — `0700` on the
+directory, `0600` on the files. It is **not encrypted**: treat it like a
+notebook, and don't write credentials into `decision` / `why`. Use `forget(id)`
+to erase a record and `prune()` to enforce a retention window.
+
+## Concurrency
+
+Writes take a lock (a `.lock` directory inside the store), so your app and a
+cron'd `memoria observe` can write at the same time without losing each other's
+updates. A writer that dies while holding the lock is cleared automatically
+after 30s; waiting writers give up after 5s with a clear error.
 
 ## License
 

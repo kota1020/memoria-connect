@@ -31,15 +31,21 @@ export const PROBES = {
 
   // Watch later memory records for negative / positive signals about this context.
   // spec: { bad:[...], good:[...], neutralIsWin=true }
+  //
+  // "Later memory" means everything written after this decision — including the
+  // judgments the agent recorded since, which is where the evidence usually is
+  // ("escalated: customer filed a complaint on order-9"). Self-exclusion is by
+  // id, not by timestamp: ts has millisecond resolution, so a strict `>` also
+  // drops a genuine signal that landed in the same millisecond.
   'memory-signal'(row, { records } = {}) {
     const s = row.outcomeSpec || {};
-    const ctx = String(row.context || '').split(/[\s/#]+/).filter(t => t.length >= 2);
-    const later = (records || []).filter(r => r.kind !== 'judgment' && String(r.ts || '') > row.ts);
+    const ctx = String(row.context || '').toLowerCase().split(/[\s/#]+/).filter(t => t.length >= 2);
+    const later = (records || []).filter(r => r.id !== row.id && String(r.ts || '') >= row.ts);
     const hay = later
-      .filter(r => ctx.length === 0 || ctx.some(tok => `${r.text || ''}`.includes(tok)))
-      .map(r => r.text || '')
+      .map(r => `${r.text || ''}`.toLowerCase())
+      .filter(text => ctx.length === 0 || ctx.some(tok => text.includes(tok)))
       .join('\n');
-    const hit = arr => (arr || []).some(k => hay.includes(k));
+    const hit = arr => (arr || []).some(k => hay.includes(String(k).toLowerCase()));
     if (hit(s.bad)) return { result: `negative signal found (${(s.bad || []).join('/')})`, verdict: 'loss' };
     if (hit(s.good)) return { result: `positive signal found (${(s.good || []).join('/')})`, verdict: 'win' };
     return s.neutralIsWin !== false ? { result: 'no negative signal within window', verdict: 'win' } : null;
@@ -58,18 +64,20 @@ export function observe({ dry = false, now = new Date(), probes = {}, records } 
   const nowIso = now.toISOString();
   const open = listOpen();
   const events = [];
-  let closed = 0, waiting = 0, nospec = 0;
+  let closed = 0, waiting = 0, nospec = 0, unknown = 0, failed = 0;
 
   for (const row of open) {
     const spec = row.outcomeSpec;
     if (!spec || !spec.metric) { nospec++; continue; }
     if (spec.dueAt && spec.dueAt > nowIso) { waiting++; continue; }
-    const probe = registry[spec.metric];
-    if (!probe) { events.push({ id: row.id, note: `unknown metric: ${spec.metric}` }); continue; }
+    const probe = Object.prototype.hasOwnProperty.call(registry, spec.metric) ? registry[spec.metric] : null;
+    // An unknown metric strands the judgment open forever, so surface it in the
+    // counts — not just as a line in `events` that a cron log swallows.
+    if (typeof probe !== 'function') { unknown++; events.push({ id: row.id, note: `unknown metric: ${spec.metric}` }); continue; }
 
     let verdict = null;
     try { verdict = probe(row, { records }); }
-    catch (e) { events.push({ id: row.id, note: `probe error: ${e.message}` }); continue; }
+    catch (e) { failed++; events.push({ id: row.id, note: `probe error: ${e.message}` }); continue; }
 
     if (!verdict) { waiting++; events.push({ id: row.id, note: `not decided yet (${spec.metric})` }); continue; }
     if (dry) { events.push({ id: row.id, dry: true, ...verdict }); continue; }
@@ -79,5 +87,5 @@ export function observe({ dry = false, now = new Date(), probes = {}, records } 
     events.push({ id: row.id, agent: row.agent, ...verdict });
   }
 
-  return { now: nowIso, open: open.length, closed, waiting, nospec, events };
+  return { now: nowIso, open: open.length, closed, waiting, nospec, unknown, failed, events };
 }
