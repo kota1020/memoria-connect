@@ -13,6 +13,15 @@ function tokenize(s) {
   )].slice(0, 16);
 }
 
+// Latin tokens match on word boundaries — a bare substring test scores "app"
+// against "happy" and buries the real hits. CJK has no such boundaries (and the
+// tokenizer grabs maximal runs), so those stay substring matches.
+function matcher(tok) {
+  if (!/^[a-z0-9]+$/.test(tok)) return hay => hay.includes(tok);
+  const re = new RegExp(`(?<![a-z0-9])${tok}(?![a-z0-9])`);
+  return hay => re.test(hay);
+}
+
 /**
  * Return the judgments most relevant to `query`, newest-first among ties.
  * @param {string} query
@@ -22,6 +31,7 @@ export function recall(query, { limit = 5, verdicts } = {}) {
   const toks = tokenize(query);
   if (!toks.length) return [];
   const min = toks.length <= 2 ? 1 : 2;
+  const tests = toks.map(matcher);
 
   let rows = readJsonl(memoryFile());
   if (verdicts && verdicts.length) rows = rows.filter(r => verdicts.includes(r.verdict));
@@ -30,7 +40,7 @@ export function recall(query, { limit = 5, verdicts } = {}) {
   for (const r of rows) {
     const hay = `${r.text || ''} ${r.decision || ''} ${r.context || ''}`.toLowerCase();
     let s = 0;
-    for (const t of toks) if (hay.includes(t)) s++;
+    for (const test of tests) if (test(hay)) s++;
     if (s >= min) scored.push([s, r]);
   }
   scored.sort((a, b) => b[0] - a[0] || String(b[1].ts || '').localeCompare(String(a[1].ts || '')));

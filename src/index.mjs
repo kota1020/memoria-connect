@@ -4,7 +4,7 @@
 // outcomes automatically. Ships zero personal data — everything lives in the
 // consumer's own store ($MEMORIA_HOME || ~/.memoria).
 
-export { decide, outcome, listOpen, VERDICTS } from './judgment.mjs';
+export { decide, outcome, listOpen, forget, prune, VERDICTS } from './judgment.mjs';
 export { recall } from './recall.mjs';
 export { observe, PROBES } from './observe.mjs';
 export { storeDir, memoryFile, openFile } from './store.mjs';

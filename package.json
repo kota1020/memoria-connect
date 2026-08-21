@@ -2,11 +2,20 @@
   "name": "memoria-connect",
   "version": "0.1.0",
   "description": "A drop-in memory + judgment layer for AI agents. Connect any agent in one import: it records decision + why + outcome, recalls the relevant past before the next decision, and closes outcomes automatically.",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kota1020/memoria-connect.git"
+  },
+  "bugs": {
+    "url": "https://github.com/kota1020/memoria-connect/issues"
+  },
+  "homepage": "https://github.com/kota1020/memoria-connect#readme",
   "type": "module",
   "main": "src/index.mjs",
   "exports": {
     ".": "./src/index.mjs",
-    "./observe": "./src/observe.mjs"
+    "./observe": "./src/observe.mjs",
+    "./package.json": "./package.json"
   },
   "bin": {
     "memoria": "bin/memoria.mjs"
