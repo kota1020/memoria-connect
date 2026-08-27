@@ -176,4 +176,8 @@ after 30s; waiting writers give up after 5s with a clear error.
 
 ## License
 
-MIT
+[PolyForm Noncommercial 1.0.0](LICENSE) — free to use, modify, and share for
+any noncommercial purpose. Commercial use requires permission from the author.
+Keep the copyright notice; this project is by [kota1020](https://github.com/kota1020).
+
+Versions published before this change were MIT-licensed and remain so.
