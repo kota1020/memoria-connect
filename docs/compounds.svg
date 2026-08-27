@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 980 330" width="980" height="330" role="img" aria-label="raw logs vs judgment records"><rect width="980" height="330" fill="#ffffff"/>
+<polygon points="56,60 444,60 444,63 447,63 447,66 450,66 450,264 447,264 447,267 444,267 444,270 56,270 56,267 53,267 53,264 50,264 50,66 53,66 53,63 56,63" fill="#fff" stroke="#8a8a8a" stroke-width="1.5" stroke-linejoin="miter"/>
+<text x="250" y="45" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="14" font-weight="700" fill="#8a8a8a" text-anchor="middle">RAW LOGS — what happened</text>
+<text x="75" y="100" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="12.5" font-weight="400" fill="#8a8a8a" text-anchor="start">12:01 clicked #submit</text>
+<text x="75" y="126" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="12.5" font-weight="400" fill="#8a8a8a" text-anchor="start">12:01 GET /page  200</text>
+<text x="75" y="152" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="12.5" font-weight="400" fill="#8a8a8a" text-anchor="start">12:02 opened editor</text>
+<text x="75" y="178" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="12.5" font-weight="400" fill="#8a8a8a" text-anchor="start">12:02 ran build  ok</text>
+<text x="75" y="204" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="12.5" font-weight="400" fill="#8a8a8a" text-anchor="start">12:03 GET /page  200</text>
+<text x="75" y="230" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="12.5" font-weight="400" fill="#8a8a8a" text-anchor="start">...</text>
+<text x="250" y="300" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="12" font-weight="400" fill="#8a8a8a" text-anchor="middle">a commodity. anyone can collect this.</text>
+<polygon points="536,60 924,60 924,63 927,63 927,66 930,66 930,264 927,264 927,267 924,267 924,270 536,270 536,267 533,267 533,264 530,264 530,66 533,66 533,63 536,63" fill="#fff" stroke="#1a1a1a" stroke-width="1.5" stroke-linejoin="miter"/>
+<text x="730" y="45" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="14" font-weight="700" fill="#1a1a1a" text-anchor="middle">JUDGMENT — what compounds</text>
+<text x="555" y="105" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="12.5" font-weight="400" fill="#8a8a8a" text-anchor="start">decision</text>
+<text x="655" y="105" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="12.5" font-weight="700" fill="#1a1a1a" text-anchor="start">"switch landing page to B"</text>
+<text x="555" y="145" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="12.5" font-weight="400" fill="#8a8a8a" text-anchor="start">why</text>
+<text x="655" y="145" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="12.5" font-weight="700" fill="#1a1a1a" text-anchor="start">"A had half the CVR"</text>
+<polygon points="551,175 909,175 909,178 912,178 912,181 915,181 915,229 912,229 912,232 909,232 909,235 551,235 551,232 548,232 548,229 545,229 545,181 548,181 548,178 551,178" fill="#f3fbe7" stroke="#65a30d" stroke-width="1.5" stroke-linejoin="miter"/>
+<text x="555" y="200" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="12.5" font-weight="400" fill="#65a30d" text-anchor="start">outcome</text>
+<text x="655" y="200" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="12.5" font-weight="700" fill="#65a30d" text-anchor="start">"conversion +40%"</text>
+<text x="655" y="222" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="12.5" font-weight="700" fill="#65a30d" text-anchor="start">verdict: win</text>
+<text x="730" y="300" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="12" font-weight="700" fill="#1a1a1a" text-anchor="middle">recalled before every similar decision. ↺</text>
+<polyline points="460,165 520,165" fill="none" stroke="#1a1a1a" stroke-width="1.5"/><polygon points="520,165 515,160 515,170" fill="#1a1a1a"/></svg>

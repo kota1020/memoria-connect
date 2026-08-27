@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 980 400" width="980" height="400" role="img" aria-label="memoria-connect judgment loop"><rect width="980" height="400" fill="#ffffff"/>
+<polygon points="66,120 274,120 274,123 277,123 277,126 280,126 280,224 277,224 277,227 274,227 274,230 66,230 66,227 63,227 63,224 60,224 60,126 63,126 63,123 66,123" fill="#fff" stroke="#1a1a1a" stroke-width="1.5" stroke-linejoin="miter"/>
+<text x="170" y="165" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="17" font-weight="700" fill="#1a1a1a" text-anchor="middle">YOUR AGENT</text>
+<text x="170" y="190" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="12" font-weight="400" fill="#8a8a8a" text-anchor="middle">any framework,</text>
+<text x="170" y="207" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="12" font-weight="400" fill="#8a8a8a" text-anchor="middle">one import</text>
+<polygon points="666,120 914,120 914,123 917,123 917,126 920,126 920,224 917,224 917,227 914,227 914,230 666,230 666,227 663,227 663,224 660,224 660,126 663,126 663,123 666,123" fill="#fff" stroke="#1a1a1a" stroke-width="1.5" stroke-linejoin="miter"/>
+<text x="790" y="160" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="17" font-weight="700" fill="#1a1a1a" text-anchor="middle">MEMORY STORE</text>
+<text x="790" y="185" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="12" font-weight="400" fill="#8a8a8a" text-anchor="middle">~/.memoria · local jsonl</text>
+<text x="790" y="207" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="12" font-weight="700" fill="#65a30d" text-anchor="middle">decision + why + outcome</text>
+<polyline points="280,150 660,150" fill="none" stroke="#1a1a1a" stroke-width="1.5"/><polygon points="660,150 655,145 655,155" fill="#1a1a1a"/>
+<polygon points="366,70 574,70 574,73 577,73 577,76 580,76 580,98 577,98 577,101 574,101 574,104 366,104 366,101 363,101 363,98 360,98 360,76 363,76 363,73 366,73" fill="#fff" stroke="#1a1a1a" stroke-width="1.5" stroke-linejoin="miter"/>
+<text x="470" y="92" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="13" font-weight="700" fill="#1a1a1a" text-anchor="middle">decide({ decision, why })</text>
+<polyline points="470,104 470,138" fill="none" stroke="#8a8a8a" stroke-width="1"/><polygon points="470,138 465,133 475,133" fill="#8a8a8a"/>
+<polyline points="660,205 280,205" fill="none" stroke="#1a1a1a" stroke-width="1.5"/><polygon points="280,205 285,200 285,210" fill="#1a1a1a"/>
+<polygon points="366,245 574,245 574,248 577,248 577,251 580,251 580,273 577,273 577,276 574,276 574,279 366,279 366,276 363,276 363,273 360,273 360,251 363,251 363,248 366,248" fill="#fff" stroke="#1a1a1a" stroke-width="1.5" stroke-linejoin="miter"/>
+<text x="470" y="267" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="13" font-weight="700" fill="#1a1a1a" text-anchor="middle">recall('query')</text>
+<text x="470" y="300" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="11" font-weight="400" fill="#8a8a8a" text-anchor="middle">the relevant past, before the next decision</text>
+<polyline points="470,245 470,218" fill="none" stroke="#8a8a8a" stroke-width="1"/><polygon points="470,218 465,223 475,223" fill="#8a8a8a"/>
+<polygon points="666,300 914,300 914,303 917,303 917,306 920,306 920,358 917,358 917,361 914,361 914,364 666,364 666,361 663,361 663,358 660,358 660,306 663,306 663,303 666,303" fill="#f3fbe7" stroke="#65a30d" stroke-width="1.5" stroke-linejoin="miter"/>
+<text x="790" y="327" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="14" font-weight="700" fill="#65a30d" text-anchor="middle">OBSERVER (cron)</text>
+<text x="790" y="348" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="11.5" font-weight="400" fill="#65a30d" text-anchor="middle">measures → win / loss / mixed</text>
+<polyline points="790,300 790,234" fill="none" stroke="#65a30d" stroke-width="1.5"/><polygon points="790,234 785,239 795,239" fill="#65a30d"/>
+<text x="812" y="275" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="11" font-weight="400" fill="#65a30d" text-anchor="start">closes outcomes</text>
+<text x="170" y="300" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="12.5" font-weight="700" fill="#1a1a1a" text-anchor="middle">↺ every loop, sharper</text></svg>

@@ -3,10 +3,18 @@
 **A drop-in memory + judgment layer for AI agents.** Connect any agent in one
 import and it starts getting sharper the more you run it.
 
+<p align="center">
+  <img src="docs/hero-loop.svg" width="860" alt="The judgment loop: your agent records decide(decision, why) into a local memory store, recalls the relevant past before the next decision, and a cron observer measures results and closes outcomes as win/loss/mixed.">
+</p>
+
 Most agent logs are raw data — *what* happened. That's a commodity; anyone can
 collect it. What actually compounds is the **judgment**: the *decision*, the
 *why*, and *how it turned out*. `memoria-connect` captures that triple, recalls
 the relevant past before the next decision, and closes outcomes automatically.
+
+<p align="center">
+  <img src="docs/compounds.svg" width="860" alt="Raw logs record what happened and are a commodity. Judgment records — decision, why, outcome — are what compounds, recalled before every similar decision.">
+</p>
 
 - **One-line connect** — `decide({ decision, why })`, that's it.
 - **Recall before you decide** — pull the relevant past judgments back in.
@@ -121,6 +129,22 @@ macOS (launchd) or Linux (cron), e.g. every 30 minutes:
 ```cron
 */30 * * * * memoria observe >> ~/.memoria/observe.log 2>&1
 ```
+
+## Real-world use
+
+How this runs in my own company (e-commerce stores operated by AI agents),
+today:
+
+- **Customer-support agent** — every reply/refund decision is recorded with its
+  why; a human approval or the refund result closes the outcome. Recall means
+  the same mistake is never repeated across stores.
+- **Agent fleets** — parallel build/research agents each record
+  decision + why as they work; wins are distilled into reusable playbooks, so
+  the next fleet starts from the last fleet's judgment instead of from zero.
+- **My own judgment** — a local screen watcher turns my workday into memory,
+  and the observer closes my calls (ship / postpone / pick approach X) against
+  what actually happened — so my agents recall *my* judgment, not just their
+  own.
 
 ## How it fits together
 
