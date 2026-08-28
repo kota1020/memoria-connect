@@ -18,6 +18,7 @@ the relevant past before the next decision, and closes outcomes automatically.
 
 - **One-line connect** — `decide({ decision, why })`, that's it.
 - **Recall before you decide** — pull the relevant past judgments back in.
+  Works on English and Japanese text (no dictionary, no dependencies).
 - **Outcomes close themselves** — attach a spec; a background pass measures the
   result and closes the loop.
 - **Local & private** — everything is written to *your* store
@@ -97,6 +98,11 @@ Built-in probes:
 | `kpi-file`      | a numeric KPI in a JSON file vs. a baseline (win/loss/mixed)      |
 | `memory-signal` | negative/positive keywords appearing in later memory for the context |
 | `manual`        | never — you close it yourself                                     |
+
+`memory-signal` closes on evidence only. If neither a `bad` nor a `good` keyword
+shows up, the judgment stays open (the observer reports it under `waiting`) —
+silence is an unmeasured decision, not a win. Pass `neutralIsWin: true` when
+"no news is good news" really is the policy for that call.
 
 Add your own:
 

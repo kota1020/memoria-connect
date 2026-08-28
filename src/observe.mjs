@@ -30,7 +30,7 @@ export const PROBES = {
   },
 
   // Watch later memory records for negative / positive signals about this context.
-  // spec: { bad:[...], good:[...], neutralIsWin=true }
+  // spec: { bad:[...], good:[...], neutralIsWin=false }
   //
   // "Later memory" means everything written after this decision — including the
   // judgments the agent recorded since, which is where the evidence usually is
@@ -48,7 +48,13 @@ export const PROBES = {
     const hit = arr => (arr || []).some(k => hay.includes(String(k).toLowerCase()));
     if (hit(s.bad)) return { result: `negative signal found (${(s.bad || []).join('/')})`, verdict: 'loss' };
     if (hit(s.good)) return { result: `positive signal found (${(s.good || []).join('/')})`, verdict: 'win' };
-    return s.neutralIsWin !== false ? { result: 'no negative signal within window', verdict: 'win' } : null;
+    // Silence is not a win — it is an unmeasured decision. Closing it as a win
+    // let a judgment nobody ever checked become evidence for the next recall,
+    // and made the ledger's win rate meaningless (every quiet call scored). So
+    // the default is to keep waiting; the observer reports it under `waiting`,
+    // and a human can still close it with outcome(). "No news is good news" is
+    // a real policy for some decisions, so it stays available — opt in.
+    return s.neutralIsWin === true ? { result: 'no negative signal within window', verdict: 'win' } : null;
   },
 };
 
