@@ -18,6 +18,7 @@ the relevant past before the next decision, and closes outcomes automatically.
 
 - **One-line connect** — `decide({ decision, why })`, that's it.
 - **Recall before you decide** — pull the relevant past judgments back in.
+  Works on English and Japanese text (no dictionary, no dependencies).
 - **Outcomes close themselves** — attach a spec; a background pass measures the
   result and closes the loop.
 - **Local & private** — everything is written to *your* store

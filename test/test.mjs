@@ -149,6 +149,26 @@ ok('decide validates outcomeSpec');
   ok('recall respects word boundaries');
 }
 
+// 12b. recall segments Japanese instead of treating a clause as one token.
+//      Regression: the tokenizer took maximal kana+kanji runs, so a natural
+//      query became a single token and matched nothing but its own twin.
+{
+  const t = fs.mkdtempSync(path.join(os.tmpdir(), 'memoria-recall-ja-'));
+  const home = process.env.MEMORIA_HOME;
+  process.env.MEMORIA_HOME = t;
+  decide({
+    agent: 'a', decision: '毎月の請求書を手作業で処理するのをやめる',
+    why: '転記ミスが月に3件出ているため', context: '経理',
+  });
+  assert.equal(recall('請求書').length, 1, 'a bare keyword still matches');
+  assert.equal(recall('請求書の処理を自動化する方法').length, 1, 'a natural-language query matches');
+  assert.equal(recall('転記ミスを減らしたい').length, 1, 'the why is searchable too');
+  assert.equal(recall('来月の売上目標を決める').length, 0, 'an unrelated query still misses');
+  process.env.MEMORIA_HOME = home;
+  fs.rmSync(t, { recursive: true, force: true });
+  ok('recall segments Japanese on script boundaries');
+}
+
 // 13. forget erases a judgment from both ledgers
 {
   const fid = decide({ agent: 'a', decision: 'leaked secret in here', why: 'oops', context: 'incident' });
