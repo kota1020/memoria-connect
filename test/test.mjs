@@ -104,14 +104,18 @@ ok('observer respects dueAt window');
   const rec = readJsonl(memoryFile()).find(r => r.id === sid && r.status === 'closed');
   assert.equal(rec.verdict, 'loss', 'negative signal in later memory must close as loss');
 
-  // and a judgment must not read its own text back as its own signal
+  // and a judgment must not read its own text back as its own signal. Its own
+  // decision says "complaint", so a probe that fails to exclude itself closes it
+  // as a loss; correct behaviour is that no *other* record signals anything, so
+  // it stays open.
   const oid = decide({
     agent: 'cs', decision: 'refund the complaint case', why: 'goodwill', context: 'order-88',
     outcomeSpec: { metric: 'memory-signal', bad: ['complaint'], afterHours: 0 },
   });
   observe({ records: readJsonl(memoryFile()) });
-  const own = readJsonl(memoryFile()).find(r => r.id === oid && r.status === 'closed');
-  assert.equal(own.verdict, 'win', 'own text is not a signal about itself');
+  assert.equal(readJsonl(memoryFile()).some(r => r.id === oid && r.status === 'closed'), false,
+    'own text is not a signal about itself');
+  assert.ok(listOpen().some(r => r.id === oid), 'and it stays open, awaiting a real signal');
   ok('memory-signal detects later negative signals');
 }
 
@@ -167,6 +171,29 @@ ok('decide validates outcomeSpec');
   process.env.MEMORIA_HOME = home;
   fs.rmSync(t, { recursive: true, force: true });
   ok('recall segments Japanese on script boundaries');
+}
+
+// 12c. a memory-signal judgment with no signal either way must NOT close as a win.
+//      Regression: `neutralIsWin` defaulted to true, so every unchecked decision
+//      auto-closed as a win and then fed the next recall as evidence.
+{
+  const nid = decide({
+    agent: 'cs', decision: 'leave the pricing alone', why: 'no data yet', context: 'order-quiet',
+    outcomeSpec: { metric: 'memory-signal', bad: ['complaint'], afterHours: 0 },
+  });
+  const s1 = observe({ records: readJsonl(memoryFile()) });
+  assert.ok(listOpen().some(r => r.id === nid), 'silence leaves the judgment open');
+  assert.ok(s1.waiting >= 1, 'and the observer reports it as waiting');
+
+  // ...but "no news is good news" stays available as an explicit opt-in
+  const yid = decide({
+    agent: 'cs', decision: 'leave the copy alone', why: 'no data yet', context: 'order-quiet-2',
+    outcomeSpec: { metric: 'memory-signal', bad: ['complaint'], neutralIsWin: true, afterHours: 0 },
+  });
+  observe({ records: readJsonl(memoryFile()) });
+  const won = readJsonl(memoryFile()).find(r => r.id === yid && r.status === 'closed');
+  assert.equal(won.verdict, 'win', 'neutralIsWin:true still closes as a win');
+  ok('no signal does not count as a win unless opted in');
 }
 
 // 13. forget erases a judgment from both ledgers

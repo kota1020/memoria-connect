@@ -99,6 +99,11 @@ Built-in probes:
 | `memory-signal` | negative/positive keywords appearing in later memory for the context |
 | `manual`        | never — you close it yourself                                     |
 
+`memory-signal` closes on evidence only. If neither a `bad` nor a `good` keyword
+shows up, the judgment stays open (the observer reports it under `waiting`) —
+silence is an unmeasured decision, not a win. Pass `neutralIsWin: true` when
+"no news is good news" really is the policy for that call.
+
 Add your own:
 
 ```js
