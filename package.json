@@ -24,6 +24,7 @@
     "src",
     "bin",
     "examples",
+    "screen",
     "README.md",
     "LICENSE"
   ],

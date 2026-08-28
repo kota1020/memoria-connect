@@ -4,3 +4,6 @@ node_modules/
 # never commit a local memory store
 .memoria/
 *.jsonl
+# build artifacts (screen module)
+screen/bin/
+screen/MemoriaScreen.app/

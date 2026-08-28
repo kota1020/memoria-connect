@@ -146,6 +146,16 @@ today:
   what actually happened — so my agents recall *my* judgment, not just their
   own.
 
+## Screen memory (macOS)
+
+The judgment layer answers "what did we decide and how did it go" — the
+[screen module](screen/) answers **"what is the user doing right now"**. A menu
+bar watcher samples your displays every ~2s into one self-updating memo
+(frontmost window, its on-screen text via AX/OCR, browser URL, timestamped
+timeline), ready to inject into any agent's prompt. Local-only, with a
+👁🟢/👁⚠️ health icon so silent failures are impossible. See
+[`screen/README.md`](screen/README.md).
+
 ## How it fits together
 
 ```
